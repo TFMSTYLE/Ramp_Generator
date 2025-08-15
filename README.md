@@ -5,5 +5,4 @@ Blender add-on for generating color ramps.
 
 Download this add-on here: https://extensions.blender.org/approval-queue/ramp-generator/
 
-![Uploading RG complimentary demo.gif…]()
 
