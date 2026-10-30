@@ -1,7 +1,10 @@
+# SPDX-FileCopyrightText: 2025-2026 The French Monkey
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 bl_info = {
     "name": "Ramp",
     "author": "The French Monkey",
-    "version": (1, 4, 3),
+    "version": (1, 4, 4),
     "blender": (4, 2, 0),
     "location": "Sidebar > Ramp Generator (Shader, Geometry, Compositor, Texture Node Editors)",
     "description": "Generate color ramps.",

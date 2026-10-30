@@ -1,13 +1,17 @@
 schema_version = "1.0.0"
 
-id = "ramp"
-version = "1.4.3"
-name = "TFMSTYLE - Ramp"
+id = "ramp_generator"
+version = "1.4.4"
+name = "Ramp Generator"
 tagline = "Generate color ramps"
+tags = ["Node", "Geometry Nodes", "Compositing"]
 maintainer = "The French Monkey"
 license = ["SPDX:GPL-3.0-or-later"]
+copyright = ["2025-2026 The French Monkey"]
 type = "add-on"
 blender_version_min = "4.2.0"
 
 website = "https://tfmstyle.com"
 
+[build]
+paths = ["__init__.py", "LICENSE"]

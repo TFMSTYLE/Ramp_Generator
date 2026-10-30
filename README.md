@@ -5,4 +5,20 @@ Blender add-on for generating color ramps.
 
 Download this add-on here: https://extensions.blender.org/approval-queue/ramp-generator/
 
+---
 
+## Install
+
+Needs Blender 4.2 or later. In Blender open Edit > Preferences > Get Extensions and search for Ramp Generator.
+
+To build the zip yourself, run this in the repo folder:
+
+```bash
+blender --command extension build
+```
+
+---
+
+## License
+
+GPL 3.0 or later. See [LICENSE](LICENSE).
