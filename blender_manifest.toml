@@ -1,0 +1,13 @@
+schema_version = "1.0.0"
+
+id = "ramp"
+version = "1.4.3"
+name = "TFMSTYLE - Ramp"
+tagline = "Generate color ramps"
+maintainer = "The French Monkey"
+license = ["SPDX:GPL-3.0-or-later"]
+type = "add-on"
+blender_version_min = "4.2.0"
+
+website = "https://tfmstyle.com"
+
