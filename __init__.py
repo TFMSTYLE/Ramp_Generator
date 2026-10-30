@@ -4,7 +4,7 @@
 bl_info = {
     "name": "Ramp",
     "author": "The French Monkey",
-    "version": (1, 4, 4),
+    "version": (1, 4, 5),
     "blender": (4, 2, 0),
     "location": "Sidebar > Ramp Generator (Shader, Geometry, Compositor, Texture Node Editors)",
     "description": "Generate color ramps.",
@@ -89,7 +89,9 @@ def lerp_color(c1, c2, t):
 def build_random_colors(num):
     return [(random.random(), random.random(), random.random(), 1.0) for _ in range(num)]
 
-def build_greyscale_colors(num):
+def build_greyscale_colors(num, even=False):
+    if even and num > 1:
+        return [(v, v, v, 1.0) for v in (i / (num - 1) for i in range(num))]
     return [(v, v, v, 1.0) for v in (random.random() for _ in range(num))]
 
 def build_stripes_colors(num):
@@ -180,13 +182,13 @@ def build_colors_from_image_fast(image_path, num_colors):
 # Palette Source
 # ------------------------------
 
-def generate_palette(num_colors, palette_type, preset_name=None, image_path=None):
+def generate_palette(num_colors, palette_type, preset_name=None, image_path=None, even_greys=False):
     if palette_type == 'COMPLEMENTARY':
         colors = build_complementary_colors(num_colors)
     elif palette_type == 'RANDOM':
         colors = build_random_colors(num_colors)
     elif palette_type == 'GREYSCALE':
-        colors = build_greyscale_colors(num_colors)
+        colors = build_greyscale_colors(num_colors, even_greys)
     elif palette_type == 'STRIPES':
         colors = build_stripes_colors(num_colors)
     elif palette_type == 'PRESET':
@@ -211,7 +213,7 @@ def generate_ramp(node, num_colors, palette_type, random_positions, preset_name=
     if node is None or node.type != 'VALTORGB':
         return
     positions = make_positions(num_colors, random_positions)
-    colors = generate_palette(num_colors, palette_type, preset_name, image_path)
+    colors = generate_palette(num_colors, palette_type, preset_name, image_path, even_greys=not random_positions)
 
     reset_color_ramp(node)
     ramp = node.color_ramp
@@ -264,7 +266,7 @@ class RampGenSettings(bpy.types.PropertyGroup):
         items=[
             ('COMPLEMENTARY', "Complementary", "complementary color scheme"),
             ('RANDOM', "Random", "Random colors"),
-            ('GREYSCALE', "Greyscale", "Random greys"),
+            ('GREYSCALE', "Greyscale", "Even greys from black to white, or random greys with Random Position on"),
             ('STRIPES', "Stripes", "black and white stripes"),
             ('PRESET', "Preset", "Use a predefined palette"),
             ('CUSTOM', "Custom Image", "Sample from an image file"),

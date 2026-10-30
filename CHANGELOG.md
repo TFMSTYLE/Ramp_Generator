@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.5
+
+- Greyscale now steps evenly from black to white when Random Position is off. With it on, the greys stay random
+
 ## 1.4.4
 
 The source code is now in this repository, with the license it has always been released under.
