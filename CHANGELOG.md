@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.6
+
+- Added update checks: when a new version is published on Relay, an Update button appears in this panel. Nothing goes online when Allow Online Access is off, and Blender store installs keep updating through the store
+
 ## 1.4.5
 
 - Greyscale now steps evenly from black to white when Random Position is off. With it on, the greys stay random

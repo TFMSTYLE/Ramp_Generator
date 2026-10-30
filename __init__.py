@@ -4,7 +4,7 @@
 bl_info = {
     "name": "Ramp",
     "author": "The French Monkey",
-    "version": (1, 4, 5),
+    "version": (1, 4, 6),
     "blender": (4, 2, 0),
     "location": "Sidebar > Ramp Generator (Shader, Geometry, Compositor, Texture Node Editors)",
     "description": "Generate color ramps.",
@@ -17,6 +17,11 @@ import random
 import math
 import colorsys
 import os
+
+try:
+    from . import relay_updater
+except ImportError:  # the Addon Collection has its own updates
+    relay_updater = None
 
 # ------------------------------
 # Preset palettes
@@ -309,6 +314,8 @@ class NODE_PT_ramp_generator(bpy.types.Panel):
     bl_category = 'Ramp'
 
     def draw(self, context):
+        if relay_updater:
+            relay_updater.draw(self.layout)
         layout = self.layout
         s = context.scene.ramp_gen_settings
 
@@ -339,11 +346,15 @@ classes = (
 )
 
 def register():
+    if relay_updater:
+        relay_updater.register("blender-ramp")
     for cls in classes:
         bpy.utils.register_class(cls)
     bpy.types.Scene.ramp_gen_settings = bpy.props.PointerProperty(type=RampGenSettings)
 
 def unregister():
+    if relay_updater:
+        relay_updater.unregister()
     for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
     del bpy.types.Scene.ramp_gen_settings
