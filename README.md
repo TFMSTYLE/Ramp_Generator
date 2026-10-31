@@ -17,6 +17,8 @@ To build the zip yourself, run this in the repo folder:
 blender --command extension build
 ```
 
+The addon is `__init__.py`, plus `relay_updater.py` for its update checks. It depends on nothing but Blender.
+
 ---
 
 ## License
