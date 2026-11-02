@@ -4,7 +4,7 @@
 bl_info = {
     "name": "Ramp",
     "author": "The French Monkey",
-    "version": (1, 4, 6),
+    "version": (1, 4, 7),
     "blender": (4, 2, 0),
     "location": "Sidebar > Ramp Generator (Shader, Geometry, Compositor, Texture Node Editors)",
     "description": "Generate color ramps.",

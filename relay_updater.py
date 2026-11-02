@@ -9,7 +9,8 @@ in the tools repo and run tools/add_updater.py, never in one addon on its own.
 When Blender starts it asks Relay whether this addon has a newer published version,
 and shows an Update button in the panel if so. It does nothing when the user has
 turned off Allow Online Access, inside the Addon Collection (which has its own
-updates), or when installed from the Blender store (which handles updates itself).
+updates), or when installed from the Blender store or any other remote repository,
+such as the TFMSTYLE one on Relay (Blender updates those itself).
 Nothing is installed until Relay's signature over it has been checked.
 """
 
@@ -112,9 +113,20 @@ def _repo():
     return parts[1] if len(parts) >= 3 and parts[0] == "bl_ext" else None
 
 
+def _remote(repo):
+    """Does Blender keep this repository up to date itself, as it does the store
+    and the TFMSTYLE repository on Relay? Then an update here would be a second one."""
+    try:
+        return any(r.module == repo and r.use_remote_url for r in bpy.context.preferences.extensions.repos)
+    except AttributeError:
+        return False
+
+
 def active():
-    """Only an extension installed outside the Blender store updates itself."""
-    return _repo() not in (None, "blender_org")
+    """Only an extension installed by hand updates itself. One from the Blender store
+    or any other remote repository gets its updates from Blender, so this stays out."""
+    repo = _repo()
+    return repo not in (None, "blender_org") and not _remote(repo)
 
 
 def _request(url):
